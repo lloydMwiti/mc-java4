@@ -1,16 +1,7 @@
 import com.google.gson.Gson;
-import dao.Person;
-import dao.Ranger;
-import models.ListAll;
-import models.RangerModel;
 import org.sql2o.Sql2o;
-import spark.ModelAndView;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static spark.Spark.*;
 

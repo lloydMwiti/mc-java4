@@ -1,7 +1,5 @@
 package dao;
 
-import models.Department;
-import models.RangerModel;
 import models.Users;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;

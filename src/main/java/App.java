@@ -3,6 +3,7 @@ import dao.Departmentsql;
 import dao.Newssql;
 import dao.Userssql;
 import models.Department;
+import models.News;
 import models.Users;
 import org.sql2o.Sql2o;
 
@@ -36,7 +37,8 @@ public class App {
         get("/department", "application/json", (req, res) -> {
             return gson.toJson(departmentdao.all());
         });
-        //CREATE DEP
+
+        //CREATE USR
         post("/users/new", "application/json", (req, res) -> {
             Users users = gson.fromJson(req.body(), Users.class);
             usersdao.add(users);
@@ -44,13 +46,25 @@ public class App {
             return gson.toJson(users);
         });
 
-        //READ DEP
+        //READ USR
         get("/users", "application/json", (req, res) -> {
             return gson.toJson(usersdao.all());
         });
 
+        //CREATE NEWS
+        post("/news/new", "application/json", (req, res) -> {
+            News news = gson.fromJson(req.body(), News.class);
+            newsdao.add(news);
+            res.status(201);;
+            return gson.toJson(news);
+        });
 
-        //FILTERS
+        //READ NEWS
+        get("/news", "application/json", (req, res) -> {
+            return gson.toJson(newsdao.all());
+        });
+
+            //FILTERS
         after((req, res) ->{
             res.type("application/json");
         });

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NewsDao {
     List<News> all();
-    void add(String news,String department);
+    void add(News news);
     void find(int id);
 
 }

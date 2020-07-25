@@ -24,12 +24,11 @@ public class Newssql implements NewsDao {
     }
 
     @Override
-    public void add(String news, String department) {
+    public void add(News news) {
         String sql="INSERT INTO news (news,departmennt) VALUES (:news,:department)";
         try(Connection con=this.sql2o.open()){
             con.createQuery(sql,true)
-                    .addParameter("news",news)
-                    .addParameter("department",department)
+                    .bind(news)
                     .executeUpdate()
                     .getKey();
         }catch(Sql2oException e){

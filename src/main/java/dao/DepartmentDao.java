@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DepartmentDao {
     List<Department> all();
-    void add(String name);
+    void add(Department department);
     void find(int id);
 
 }

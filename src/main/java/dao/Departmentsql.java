@@ -23,11 +23,11 @@ public class Departmentsql implements DepartmentDao {
     }
 
     @Override
-    public void add(String name) {
+    public void add(Department department) {
         String sql="INSERT INTO department (name) VALUES (:name)";
         try(Connection con=this.sql2o.open()){
             con.createQuery(sql,true)
-                    .addParameter("name",name)
+                    .bind(department)
                     .executeUpdate()
                     .getKey();
         }catch(Sql2oException e){

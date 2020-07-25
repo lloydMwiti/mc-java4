@@ -25,13 +25,11 @@ public class Userssql implements UsersDao {
     }
 
     @Override
-    public void add(String name, String email, String depId) {
+    public void add(Users users) {
         String sql="INSERT INTO users (name,email,badge) VALUES (:name,:email,:badge)";
         try(Connection con=this.sql2o.open()){
             con.createQuery(sql,true)
-                    .addParameter("name",name)
-                    .addParameter("email",email)
-                    .addParameter("depId",depId)
+                    .bind(users)
                     .executeUpdate()
                     .getKey();
         }catch(Sql2oException e){

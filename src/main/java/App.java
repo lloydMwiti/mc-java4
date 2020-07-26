@@ -8,6 +8,9 @@ import models.Users;
 import org.sql2o.Sql2o;
 
 import java.sql.Connection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -35,6 +38,7 @@ public class App {
 
         //READ DEP
         get("/department", "application/json", (req, res) -> {
+            res.status(200);
             return gson.toJson(departmentdao.all());
         });
 
@@ -48,6 +52,7 @@ public class App {
 
         //READ USR
         get("/users", "application/json", (req, res) -> {
+            res.status(200);
             return gson.toJson(usersdao.all());
         });
 
@@ -64,9 +69,19 @@ public class App {
             return gson.toJson(newsdao.all());
         });
 
+
             //FILTERS
         after((req, res) ->{
             res.type("application/json");
+        });
+        exception(ApiException.class, (exception, req, res) -> {
+            ApiException err = exception;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json");
+            res.status(err.getStatusCode());
+            res.body(gson.toJson(jsonMap));
         });
 
     }

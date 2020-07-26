@@ -21,12 +21,11 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:postgresql://localhost:5432/animals";
+        String connectionString = "jdbc:postgresql://localhost:5432/newsweek";
         Sql2o sql2o = new Sql2o(connectionString, "postgres", "chowder");
         Departmentsql departmentdao=new Departmentsql(sql2o);
         Userssql usersdao=new Userssql(sql2o);
         Newssql newsdao=new Newssql(sql2o);
-        conn = (Connection) sql2o.open();
 
         //CREATE DEP
         post("/department/new", "application/json", (req, res) -> {
